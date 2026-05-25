@@ -6,8 +6,13 @@ export default defineConfig({
   },
 
   tanstackStart: {
-    prerender: {
-      enabled: false,
+    spa: {
+      enabled: true,
+      prerender: {
+        outputPath: "/_shell.html",
+        crawlLinks: false,
+        retryCount: 0,
+      },
     },
   },
 });

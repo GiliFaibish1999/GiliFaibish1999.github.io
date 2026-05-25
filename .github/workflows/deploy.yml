@@ -31,44 +31,41 @@ jobs:
       - name: Build site
         run: bun run build
 
+      - name: Show build output
+        run: |
+          echo "dist output:"
+          find dist -maxdepth 5 -type f | sort || true
+
       - name: Prepare GitHub Pages folder
         run: |
           rm -rf .github-pages
           mkdir -p .github-pages
 
-          cp -a dist/client/. .github-pages/
+          if [ -d "dist/client" ]; then
+            cp -a dist/client/. .github-pages/
+          else
+            echo "dist/client was not found."
+            find dist -maxdepth 5 -type f | sort || true
+            exit 1
+          fi
 
-          CSS_FILES=$(find .github-pages/assets -name "*.css" -type f | sort)
-          JS_FILES=$(find .github-pages/assets -name "*.js" -type f | sort)
-
-          {
-            echo '<!doctype html>'
-            echo '<html lang="en">'
-            echo '<head>'
-            echo '  <meta charset="UTF-8" />'
-            echo '  <meta name="viewport" content="width=device-width, initial-scale=1.0" />'
-            echo '  <title>Gili Faibish — Cloud Architect · DevOps · SRE</title>'
-            echo '  <meta name="description" content="Gili Faibish — Cloud Architect, DevOps Engineer and SRE building AWS, Kubernetes and VMware platforms with Terraform, CI/CD and observability." />'
-            for css in $CSS_FILES; do
-              css_path="${css#.github-pages/}"
-              echo "  <link rel=\"stylesheet\" href=\"/$css_path\" />"
-            done
-            echo '</head>'
-            echo '<body>'
-            echo '  <div id="root"></div>'
-            for js in $JS_FILES; do
-              js_path="${js#.github-pages/}"
-              echo "  <script type=\"module\" src=\"/$js_path\"></script>"
-            done
-            echo '</body>'
-            echo '</html>'
-          } > .github-pages/index.html
+          if [ -f ".github-pages/index.html" ]; then
+            echo "index.html already exists."
+          elif [ -f ".github-pages/_shell.html" ]; then
+            echo "Using TanStack SPA shell as index.html."
+            cp .github-pages/_shell.html .github-pages/index.html
+          else
+            echo "No index.html or _shell.html found."
+            echo "GitHub Pages needs a static HTML entry file."
+            find .github-pages -maxdepth 5 -type f | sort || true
+            exit 1
+          fi
 
           cp .github-pages/index.html .github-pages/404.html
           touch .github-pages/.nojekyll
 
           echo "Prepared GitHub Pages output:"
-          find .github-pages -maxdepth 3 -type f | sort
+          find .github-pages -maxdepth 5 -type f | sort
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
