@@ -35,6 +35,14 @@ jobs:
         run: |
           cp dist/index.html dist/404.html
           touch dist/.nojekyll
+
+          cat > dist/deploy-info.txt <<EOF
+          commit=${GITHUB_SHA}
+          branch=${GITHUB_REF_NAME}
+          run_id=${GITHUB_RUN_ID}
+          deployed_at=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          EOF
+
           echo "Prepared files:"
           find dist -maxdepth 3 -type f | sort
 
