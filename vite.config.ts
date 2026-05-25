@@ -6,26 +6,8 @@ export default defineConfig({
   },
 
   tanstackStart: {
-    server: {
-      entry: "server",
-    },
-
     prerender: {
-      enabled: true,
-      autoSubfolderIndex: true,
-      autoStaticPathsDiscovery: false,
-      crawlLinks: false,
-      failOnError: true,
+      enabled: false,
     },
-
-    pages: [
-      {
-        path: "/",
-        prerender: {
-          enabled: true,
-          outputPath: "/index.html",
-        },
-      },
-    ],
   },
 });
