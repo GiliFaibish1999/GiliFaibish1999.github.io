@@ -31,7 +31,7 @@ const NAV = [
 
 export function Index() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
       <NavBar />
       <Hero />
       <Experience />
@@ -44,38 +44,45 @@ export function Index() {
 
 function NavBar() {
   const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 20);
     on();
     window.addEventListener("scroll", on);
     return () => window.removeEventListener("scroll", on);
   }, []);
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all ${
-        scrolled ? "backdrop-blur-md bg-background/70 border-b border-border" : ""
+        scrolled ? "backdrop-blur-md bg-background/85 border-b border-border" : "bg-background/40 backdrop-blur-sm"
       }`}
     >
-      <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-        <a href="#top" className="font-bold tracking-tight text-lg">
+      <nav className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-4 py-3 sm:flex-row sm:justify-between sm:px-6 sm:py-4">
+        <a href="#top" className="shrink-0 text-base font-bold tracking-tight sm:text-lg">
           <span className="text-accent">{"<"}</span>GF<span className="text-accent">{"/>"}</span>
         </a>
-        <ul className="hidden md:flex gap-8 text-sm font-medium">
+
+        <ul className="hidden gap-8 text-sm font-medium md:flex">
           {NAV.map((n) => (
             <li key={n.id}>
               <a
                 href={`#${n.id}`}
-                className="text-muted-foreground hover:text-accent transition-colors"
+                className="text-muted-foreground transition-colors hover:text-accent"
               >
                 {n.label}
               </a>
             </li>
           ))}
         </ul>
-        <ul className="flex md:hidden gap-4 text-xs">
+
+        <ul className="flex w-full max-w-full items-center justify-center gap-1 overflow-x-auto rounded-full border border-border bg-background/70 px-2 py-1 text-[11px] font-medium shadow-sm [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden">
           {NAV.map((n) => (
-            <li key={n.id}>
-              <a href={`#${n.id}`} className="text-muted-foreground hover:text-accent">
+            <li key={n.id} className="shrink-0">
+              <a
+                href={`#${n.id}`}
+                className="block rounded-full px-2.5 py-1.5 text-muted-foreground transition-colors hover:bg-accent/10 hover:text-accent"
+              >
                 {n.label}
               </a>
             </li>
@@ -89,14 +96,16 @@ function NavBar() {
 function FlipName() {
   const words = ["Gili Faibish", "@GiliFaibish1999"];
   const [i, setI] = useState(0);
+
   useEffect(() => {
     const t = setInterval(() => setI((p) => (p + 1) % words.length), 3000);
     return () => clearInterval(t);
   }, []);
+
   return (
     <span
       key={i}
-      className="text-accent inline-block animate-in fade-in slide-in-from-bottom-2 duration-500"
+      className="block max-w-full break-words text-accent animate-in fade-in slide-in-from-bottom-2 duration-500 sm:inline"
     >
       {words[i]}
     </span>
@@ -107,26 +116,26 @@ function Hero() {
   return (
     <section
       id="top"
-      className="relative grid-bg min-h-screen flex items-center justify-center pt-24 pb-16 px-6"
+      className="relative grid-bg flex min-h-[100svh] items-center justify-center px-4 pb-12 pt-32 sm:px-6 sm:pb-16 sm:pt-28"
     >
-      <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
-        <div className="relative mb-10">
-          <div className="absolute inset-0 rounded-full bg-accent/30 blur-3xl scale-110" />
+      <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
+        <div className="relative mb-6 sm:mb-8 md:mb-10">
+          <div className="absolute inset-0 scale-110 rounded-full bg-accent/30 blur-3xl" />
           <img
             src={portrait}
             alt="Gili Faibish"
-            className="relative w-56 md:w-72 h-auto object-contain drop-shadow-[0_0_30px_rgba(39,159,245,0.5)]"
+            className="relative h-auto w-36 object-contain drop-shadow-[0_0_30px_rgba(39,159,245,0.5)] sm:w-48 md:w-72"
           />
         </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+        <h1 className="max-w-full text-[2.15rem] font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
           Hi, I am <FlipName />
         </h1>
 
-        <p className="mt-6 max-w-2xl text-base md:text-lg text-muted-foreground leading-relaxed">
-          <span className="text-foreground font-medium">Cloud Architect</span>,{" "}
-          <span className="text-foreground font-medium">DevOps Engineer</span> &{" "}
-          <span className="text-foreground font-medium">SRE</span> with a B.Sc. in Computer Science
+        <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:mt-6 sm:text-base md:text-lg">
+          <span className="font-medium text-foreground">Cloud Architect</span>,{" "}
+          <span className="font-medium text-foreground">DevOps Engineer</span> &{" "}
+          <span className="font-medium text-foreground">SRE</span> with a B.Sc. in Computer Science
           and 6+ years building, automating and operating production infrastructure across{" "}
           <span className="text-accent">AWS</span>,{" "}
           <span className="text-accent">Kubernetes</span> and{" "}
@@ -134,7 +143,7 @@ function Hero() {
           observability, networking, security and platform reliability.
         </p>
 
-        <div className="mt-10 grid grid-cols-2 md:flex md:flex-row gap-3 md:gap-4 w-full max-w-2xl">
+        <div className="mt-8 grid w-full max-w-sm grid-cols-2 gap-2 sm:mt-10 sm:max-w-2xl sm:grid-cols-4 sm:gap-3 md:flex md:flex-row md:gap-4">
           <ActionButton href="/Gili_Faibish_Resume_2026.pdf" label="Resume" icon="resume" download />
           <ActionButton href="mailto:gilifaibishpro@gmail.com" label="Email" icon="email" />
           <ActionButton
@@ -170,10 +179,10 @@ function ActionButton({
       target={href.startsWith("http") ? "_blank" : undefined}
       rel="noreferrer"
       download={download}
-      className="group flex-1 inline-flex items-center justify-center gap-2 rounded-full border border-accent/60 bg-accent/10 hover:bg-accent hover:text-primary-foreground px-5 py-3 text-sm font-semibold transition-all hover:shadow-glow hover:-translate-y-0.5"
+      className="group inline-flex min-w-0 flex-1 items-center justify-center gap-2 rounded-full border border-accent/60 bg-accent/10 px-3 py-3 text-xs font-semibold transition-all hover:-translate-y-0.5 hover:bg-accent hover:text-primary-foreground hover:shadow-glow sm:px-4 sm:text-sm md:px-5"
     >
-      <Icon name={icon} className="w-4 h-4" />
-      {label}
+      <Icon name={icon} className="h-4 w-4 shrink-0" />
+      <span className="truncate">{label}</span>
     </a>
   );
 }
@@ -222,23 +231,23 @@ function Section({
   children: React.ReactNode;
   alt?: boolean;
 }) {
+  const [first, ...rest] = title.split(" ");
+
   return (
     <section
       id={id}
-      className={`scroll-mt-20 py-24 px-6 ${alt ? "bg-card/50" : ""}`}
+      className={`scroll-mt-28 px-4 py-16 sm:px-6 sm:py-20 md:scroll-mt-20 md:py-24 ${alt ? "bg-card/50" : ""}`}
     >
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-5xl font-bold text-center mb-4">
-          {title.split(" ")[0]}{" "}
-          <span className="text-accent">{title.split(" ").slice(1).join(" ")}</span>
+      <div className="mx-auto max-w-6xl">
+        <h2 className="text-center text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+          {first} <span className="text-accent">{rest.join(" ")}</span>
         </h2>
-        <div className="mx-auto h-1 w-20 rounded bg-accent mb-12" />
+        <div className="mx-auto mb-8 mt-4 h-1 w-16 rounded bg-accent sm:mb-12 sm:w-20" />
         {children}
       </div>
     </section>
   );
 }
-
 
 const EXPERIENCES = [
   {
@@ -306,23 +315,25 @@ function Experience() {
   return (
     <Section id="experience" title="My Experience" alt>
       <div className="relative">
-        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-border" />
-        <div className="space-y-12">
+        <div className="absolute left-1/2 top-0 bottom-0 hidden w-px bg-border md:block" />
+        <div className="space-y-5 md:space-y-12">
           {EXPERIENCES.map((e, i) => (
             <div
               key={i}
-              className={`relative md:grid md:grid-cols-2 md:gap-12 ${
+              className={`relative rounded-2xl border border-border bg-background/60 p-5 shadow-sm md:grid md:grid-cols-2 md:gap-12 md:border-0 md:bg-transparent md:p-0 md:shadow-none ${
                 i % 2 === 0 ? "" : "md:[&>*:first-child]:order-2"
               }`}
             >
-              <div className="absolute left-4 md:left-1/2 -translate-x-1/2 mt-2 w-4 h-4 rounded-full bg-accent shadow-glow" />
-              <div className="pl-12 md:pl-0 md:pr-12 md:text-right">
-                <p className="text-accent text-sm font-mono">{e.period}</p>
-                <h3 className="text-xl font-bold mt-1">{e.role}</h3>
-                <p className="text-muted-foreground">{e.company}</p>
+              <div className="absolute left-1/2 mt-2 hidden h-4 w-4 -translate-x-1/2 rounded-full bg-accent shadow-glow md:block" />
+
+              <div className="md:pr-12 md:text-right">
+                <p className="font-mono text-xs text-accent sm:text-sm">{e.period}</p>
+                <h3 className="mt-1 text-lg font-bold leading-snug sm:text-xl">{e.role}</h3>
+                <p className="mt-1 text-sm text-muted-foreground sm:text-base">{e.company}</p>
               </div>
-              <div className="pl-12 md:pl-12 mt-3 md:mt-0">
-                <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-5">
+
+              <div className="mt-4 md:mt-0 md:pl-12">
+                <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground">
                   {e.points.map((p, j) => (
                     <li key={j}>{p}</li>
                   ))}
@@ -406,28 +417,28 @@ const SKILLS: { category: string; items: Skill[] }[] = [
 function Skills() {
   return (
     <Section id="skills" title="My Skills">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
         {SKILLS.map((g) => (
           <div
             key={g.category}
-            className="rounded-2xl border border-border bg-card/60 p-6 hover:border-accent/60 transition-colors"
+            className="rounded-2xl border border-border bg-card/60 p-4 transition-colors hover:border-accent/60 sm:p-6"
           >
-            <h3 className="font-semibold text-lg mb-4 text-accent">{g.category}</h3>
-            <div className="flex flex-wrap gap-3">
+            <h3 className="mb-4 text-base font-semibold text-accent sm:text-lg">{g.category}</h3>
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {g.items.map((s) => (
                 <div
                   key={s.name}
-                  className="flex items-center gap-2 rounded-full bg-background border border-border px-3 py-1.5 text-xs hover:border-accent transition-colors"
+                  className="flex min-w-0 items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-xs transition-colors hover:border-accent"
                 >
                   {(s.iconUrl || s.slug) && (
                     <img
                       src={s.iconUrl || `https://cdn.simpleicons.org/${s.slug}/${s.color ?? "279FF5"}`}
                       alt={s.name}
-                      className="w-4 h-4"
+                      className="h-4 w-4 shrink-0"
                       loading="lazy"
                     />
                   )}
-                  <span>{s.name}</span>
+                  <span className="truncate">{s.name}</span>
                 </div>
               ))}
             </div>
@@ -494,30 +505,30 @@ const PROJECTS = [
 function Projects() {
   return (
     <Section id="projects" title="Recent Projects" alt>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
         {PROJECTS.map((p) => (
           <a
             key={p.name}
             href={`https://github.com/GiliFaibish1999/${p.name}`}
             target="_blank"
             rel="noreferrer"
-            className="group flex flex-col rounded-2xl border border-border bg-card/60 p-6 hover:border-accent hover:-translate-y-1 hover:shadow-glow transition-all"
+            className="group flex min-w-0 flex-col rounded-2xl border border-border bg-card/60 p-4 transition-all hover:-translate-y-1 hover:border-accent hover:shadow-glow sm:p-6"
           >
-            <div className="flex items-center justify-between mb-3">
-              <Icon name="github" className="w-6 h-6 text-muted-foreground group-hover:text-accent transition-colors" />
-              <svg className="w-4 h-4 text-muted-foreground group-hover:text-accent transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <div className="mb-3 flex items-center justify-between">
+              <Icon name="github" className="h-6 w-6 text-muted-foreground transition-colors group-hover:text-accent" />
+              <svg className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M7 17 17 7M7 7h10v10" />
               </svg>
             </div>
-            <h3 className="font-bold text-base mb-2 break-all group-hover:text-accent transition-colors">
+            <h3 className="mb-2 break-words text-base font-bold leading-snug transition-colors group-hover:text-accent">
               {p.name}
             </h3>
-            <p className="text-sm text-muted-foreground flex-1">{p.desc}</p>
-            <div className="flex flex-wrap gap-1.5 mt-4">
+            <p className="flex-1 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+            <div className="mt-4 flex flex-wrap gap-1.5">
               {p.tags.map((t) => (
                 <span
                   key={t}
-                  className="text-[10px] font-medium px-2 py-1 rounded-full bg-accent/10 text-accent border border-accent/20"
+                  className="rounded-full border border-accent/20 bg-accent/10 px-2 py-1 text-[10px] font-medium text-accent"
                 >
                   {t}
                 </span>
@@ -532,9 +543,9 @@ function Projects() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border py-10 px-6 text-center text-sm text-muted-foreground">
+    <footer className="border-t border-border px-4 py-8 text-center text-sm leading-relaxed text-muted-foreground sm:px-6 sm:py-10">
       <p>
-        © {new Date().getFullYear()} Gili Faibish · Built with TanStack Start ·{" "}
+        © {new Date().getFullYear()} Gili Faibish · Built with Vite + React ·{" "}
         <a href="#top" className="text-accent hover:underline">Back to top</a>
       </p>
     </footer>
