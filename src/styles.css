@@ -48,3 +48,164 @@
   .bg-accent { background-color: #279FF5; }
   .shadow-glow { box-shadow: 0 0 60px -10px rgba(39,159,245,0.35); }
 }
+
+/* ---------------------------------------------
+   Mobile responsive rescue patch
+   GitHub Pages / Vite portfolio
+--------------------------------------------- */
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Images should never overflow the mobile screen */
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make scrolling to anchor sections nicer under fixed navbar */
+section {
+  scroll-margin-top: 90px;
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  /* General page padding */
+  main,
+  section,
+  header,
+  footer {
+    max-width: 100%;
+  }
+
+  section {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  /* Navbar */
+  nav {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  nav ul,
+  nav div {
+    max-width: 100%;
+  }
+
+  /* Prevent desktop horizontal menu from breaking mobile */
+  nav a {
+    font-size: 0.78rem !important;
+    white-space: nowrap;
+  }
+
+  /* Hero section */
+  h1 {
+    font-size: clamp(2.2rem, 12vw, 4rem) !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.04em !important;
+  }
+
+  h2 {
+    font-size: clamp(1.7rem, 8vw, 2.6rem) !important;
+    line-height: 1.15 !important;
+  }
+
+  h3 {
+    font-size: 1.1rem !important;
+    line-height: 1.35 !important;
+  }
+
+  p {
+    font-size: 1rem !important;
+    line-height: 1.65 !important;
+  }
+
+  /* Make all grids one column on mobile */
+  .grid,
+  [class*="grid-cols-"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Make row layouts stack on mobile */
+  .flex {
+    flex-wrap: wrap;
+  }
+
+  /* Fix cards */
+  article,
+  .card,
+  [class*="rounded"] {
+    max-width: 100%;
+  }
+
+  /* Buttons row becomes clean 2x2 / stacked if needed */
+  a[href*="resume"],
+  a[href^="mailto:"],
+  a[href*="linkedin"],
+  a[href*="github"] {
+    min-width: 0 !important;
+  }
+
+  /* Any large fixed widths should shrink */
+  [class*="w-["],
+  [class*="min-w-"],
+  [class*="max-w-"] {
+    max-width: 100% !important;
+  }
+
+  /* Experience timeline/cards should not alternate left-right on mobile */
+  [class*="order-"] {
+    order: initial !important;
+  }
+
+  /* Project and skill cards */
+  [class*="gap-"] {
+    row-gap: 1rem;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 430px) {
+  section {
+    padding-left: 0.85rem !important;
+    padding-right: 0.85rem !important;
+  }
+
+  nav a {
+    font-size: 0.72rem !important;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 13vw, 3.3rem) !important;
+  }
+
+  p {
+    font-size: 0.95rem !important;
+  }
+
+  /* Buttons should be full-width on very small phones */
+  a[href*="resume"],
+  a[href^="mailto:"],
+  a[href*="linkedin"],
+  a[href*="github"] {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
