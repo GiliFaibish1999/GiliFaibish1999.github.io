@@ -1,18 +1,8 @@
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  vite: {
-    base: "/",
-  },
-
-  tanstackStart: {
-    spa: {
-      enabled: true,
-      prerender: {
-        outputPath: "/_shell.html",
-        crawlLinks: false,
-        retryCount: 0,
-      },
-    },
-  },
+  base: "/",
+  plugins: [react(), tsconfigPaths()],
 });

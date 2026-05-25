@@ -29,7 +29,7 @@ const NAV = [
   { id: "projects", label: "Projects" },
 ];
 
-function Index() {
+export function Index() {
   return (
     <div className="min-h-screen">
       <NavBar />
