@@ -419,12 +419,14 @@ function Skills() {
                   key={s.name}
                   className="flex items-center gap-2 rounded-full bg-background border border-border px-3 py-1.5 text-xs hover:border-accent transition-colors"
                 >
-                  <img
-                    src={`https://cdn.simpleicons.org/${s.slug}/${s.color ?? "279FF5"}`}
-                    alt={s.name}
-                    className="w-4 h-4"
-                    loading="lazy"
-                  />
+                  {(s.iconUrl || s.slug) && (
+                    <img
+                      src={s.iconUrl || `https://cdn.simpleicons.org/${s.slug}/${s.color ?? "279FF5"}`}
+                      alt={s.name}
+                      className="w-4 h-4"
+                      loading="lazy"
+                    />
+                  )}
                   <span>{s.name}</span>
                 </div>
               ))}
