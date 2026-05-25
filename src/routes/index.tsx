@@ -34,7 +34,6 @@ function Index() {
     <div className="min-h-screen">
       <NavBar />
       <Hero />
-      <About />
       <Experience />
       <Skills />
       <Projects />
