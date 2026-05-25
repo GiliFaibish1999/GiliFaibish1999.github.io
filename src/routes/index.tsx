@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
 });
 
 const NAV = [
-  { id: "about", label: "About" },
+  { id: "top", label: "About" },
   { id: "experience", label: "Experience" },
   { id: "skills", label: "Skills" },
   { id: "projects", label: "Projects" },
@@ -34,7 +34,6 @@ function Index() {
     <div className="min-h-screen">
       <NavBar />
       <Hero />
-      <About />
       <Experience />
       <Skills />
       <Projects />
@@ -240,48 +239,6 @@ function Section({
   );
 }
 
-function About() {
-  return (
-    <Section id="about" title="About Me">
-      <div className="grid md:grid-cols-3 gap-6 text-muted-foreground leading-relaxed">
-        <div className="md:col-span-2 space-y-4 text-base">
-          <p>
-            I'm a Cloud Architect and DevOps Engineer based in Paris, with EU & Israeli
-            citizenship and a B.Sc. in Computer Science. I bridge architecture design and
-            hands-on implementation — building reusable Terraform modules, reliable
-            deployment pipelines, operational runbooks and clear documentation for both
-            technical and non-technical stakeholders.
-          </p>
-          <p>
-            My work spans <span className="text-accent">AWS</span> (Lambda@Edge, CloudFront,
-            Organizations, SSO, EventBridge, DynamoDB),{" "}
-            <span className="text-accent">Kubernetes</span> (EKS, k3s, Kind, Helm, NetworkPolicies)
-            and <span className="text-accent">VMware vSphere/ESXi</span> on-prem environments —
-            tied together with CI/CD pipelines, Prometheus/Grafana observability and
-            security-first platform engineering.
-          </p>
-        </div>
-        <div className="rounded-2xl border border-border bg-card/60 p-6 space-y-3 text-sm">
-          <Info k="Location" v="Paris, France" />
-          <Info k="Citizenship" v="EU & Israeli" />
-          <Info k="Degree" v="B.Sc. Computer Science" />
-          <Info k="Experience" v="6+ years" />
-          <Info k="Languages" v="EN · HE · FR" />
-          <Info k="Open to" v="Remote / On-site / Relocation" />
-        </div>
-      </div>
-    </Section>
-  );
-}
-
-function Info({ k, v }: { k: string; v: string }) {
-  return (
-    <div className="flex justify-between gap-4 border-b border-border/50 pb-2 last:border-0">
-      <span className="text-muted-foreground">{k}</span>
-      <span className="text-foreground font-medium text-right">{v}</span>
-    </div>
-  );
-}
 
 const EXPERIENCES = [
   {
@@ -379,17 +336,17 @@ function Experience() {
   );
 }
 
-type Skill = { name: string; slug: string; color?: string };
+type Skill = { name: string; slug?: string; color?: string; iconUrl?: string };
 const SKILLS: { category: string; items: Skill[] }[] = [
   {
     category: "Cloud & Serverless",
     items: [
-      { name: "AWS", slug: "amazonaws", color: "FF9900" },
+      { name: "AWS", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
       { name: "GCP", slug: "googlecloud", color: "4285F4" },
-      { name: "Lambda", slug: "awslambda", color: "FF9900" },
-      { name: "CloudFront", slug: "amazoncloudfront", color: "8C4FFF" },
-      { name: "DynamoDB", slug: "amazondynamodb", color: "4053D6" },
-      { name: "S3", slug: "amazons3", color: "569A31" },
+      { name: "Lambda" },
+      { name: "CloudFront" },
+      { name: "DynamoDB" },
+      { name: "S3" },
     ],
   },
   {
@@ -398,7 +355,7 @@ const SKILLS: { category: string; items: Skill[] }[] = [
       { name: "Kubernetes", slug: "kubernetes", color: "326CE5" },
       { name: "Helm", slug: "helm", color: "0F1689" },
       { name: "Docker", slug: "docker", color: "2496ED" },
-      { name: "EKS", slug: "amazoneks", color: "FF9900" },
+      { name: "EKS" },
     ],
   },
   {
@@ -462,12 +419,14 @@ function Skills() {
                   key={s.name}
                   className="flex items-center gap-2 rounded-full bg-background border border-border px-3 py-1.5 text-xs hover:border-accent transition-colors"
                 >
-                  <img
-                    src={`https://cdn.simpleicons.org/${s.slug}/${s.color ?? "279FF5"}`}
-                    alt={s.name}
-                    className="w-4 h-4"
-                    loading="lazy"
-                  />
+                  {(s.iconUrl || s.slug) && (
+                    <img
+                      src={s.iconUrl || `https://cdn.simpleicons.org/${s.slug}/${s.color ?? "279FF5"}`}
+                      alt={s.name}
+                      className="w-4 h-4"
+                      loading="lazy"
+                    />
+                  )}
                   <span>{s.name}</span>
                 </div>
               ))}
