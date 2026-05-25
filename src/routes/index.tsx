@@ -239,48 +239,6 @@ function Section({
   );
 }
 
-function About() {
-  return (
-    <Section id="about" title="About Me">
-      <div className="grid md:grid-cols-3 gap-6 text-muted-foreground leading-relaxed">
-        <div className="md:col-span-2 space-y-4 text-base">
-          <p>
-            I'm a Cloud Architect and DevOps Engineer based in Paris, with EU & Israeli
-            citizenship and a B.Sc. in Computer Science. I bridge architecture design and
-            hands-on implementation — building reusable Terraform modules, reliable
-            deployment pipelines, operational runbooks and clear documentation for both
-            technical and non-technical stakeholders.
-          </p>
-          <p>
-            My work spans <span className="text-accent">AWS</span> (Lambda@Edge, CloudFront,
-            Organizations, SSO, EventBridge, DynamoDB),{" "}
-            <span className="text-accent">Kubernetes</span> (EKS, k3s, Kind, Helm, NetworkPolicies)
-            and <span className="text-accent">VMware vSphere/ESXi</span> on-prem environments —
-            tied together with CI/CD pipelines, Prometheus/Grafana observability and
-            security-first platform engineering.
-          </p>
-        </div>
-        <div className="rounded-2xl border border-border bg-card/60 p-6 space-y-3 text-sm">
-          <Info k="Location" v="Paris, France" />
-          <Info k="Citizenship" v="EU & Israeli" />
-          <Info k="Degree" v="B.Sc. Computer Science" />
-          <Info k="Experience" v="6+ years" />
-          <Info k="Languages" v="EN · HE · FR" />
-          <Info k="Open to" v="Remote / On-site / Relocation" />
-        </div>
-      </div>
-    </Section>
-  );
-}
-
-function Info({ k, v }: { k: string; v: string }) {
-  return (
-    <div className="flex justify-between gap-4 border-b border-border/50 pb-2 last:border-0">
-      <span className="text-muted-foreground">{k}</span>
-      <span className="text-foreground font-medium text-right">{v}</span>
-    </div>
-  );
-}
 
 const EXPERIENCES = [
   {
