@@ -336,17 +336,17 @@ function Experience() {
   );
 }
 
-type Skill = { name: string; slug: string; color?: string };
+type Skill = { name: string; slug?: string; color?: string; iconUrl?: string };
 const SKILLS: { category: string; items: Skill[] }[] = [
   {
     category: "Cloud & Serverless",
     items: [
-      { name: "AWS", slug: "amazonaws", color: "FF9900" },
+      { name: "AWS", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
       { name: "GCP", slug: "googlecloud", color: "4285F4" },
-      { name: "Lambda", slug: "awslambda", color: "FF9900" },
-      { name: "CloudFront", slug: "amazoncloudfront", color: "8C4FFF" },
-      { name: "DynamoDB", slug: "amazondynamodb", color: "4053D6" },
-      { name: "S3", slug: "amazons3", color: "569A31" },
+      { name: "Lambda" },
+      { name: "CloudFront" },
+      { name: "DynamoDB" },
+      { name: "S3" },
     ],
   },
   {
@@ -355,7 +355,7 @@ const SKILLS: { category: string; items: Skill[] }[] = [
       { name: "Kubernetes", slug: "kubernetes", color: "326CE5" },
       { name: "Helm", slug: "helm", color: "0F1689" },
       { name: "Docker", slug: "docker", color: "2496ED" },
-      { name: "EKS", slug: "amazoneks", color: "FF9900" },
+      { name: "EKS" },
     ],
   },
   {
