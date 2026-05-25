@@ -31,31 +31,36 @@ jobs:
       - name: Build site
         run: bun run build
 
+      - name: Show build output
+        run: |
+          echo "Build output:"
+          find dist -maxdepth 5 -type f | sort || true
+          find .output -maxdepth 5 -type f | sort || true
+
       - name: Prepare GitHub Pages folder
         run: |
           rm -rf .github-pages
           mkdir -p .github-pages
 
-          if [ -d "dist/client" ]; then
-            cp -a dist/client/. .github-pages/
-          elif [ -d "dist" ]; then
+          if [ -f "dist/index.html" ]; then
             cp -a dist/. .github-pages/
-          elif [ -d ".output/public" ]; then
+          elif [ -f "dist/client/index.html" ]; then
+            cp -a dist/client/. .github-pages/
+          elif [ -f "dist/public/index.html" ]; then
+            cp -a dist/public/. .github-pages/
+          elif [ -f ".output/public/index.html" ]; then
             cp -a .output/public/. .github-pages/
           else
-            echo "Could not find a static build output folder."
-            echo "Expected one of: dist/client, dist, .output/public"
-            find . -maxdepth 3 -type d
+            echo "No static index.html found."
+            echo "GitHub Pages needs a static index.html."
+            echo "Here is what was generated:"
+            find dist -maxdepth 5 -type f | sort || true
+            find .output -maxdepth 5 -type f | sort || true
             exit 1
           fi
 
-          if [ -f ".github-pages/index.html" ]; then
-            cp .github-pages/index.html .github-pages/404.html
-          else
-            echo "No index.html found in static output. GitHub Pages needs a static index.html."
-            find .github-pages -maxdepth 3 -type f
-            exit 1
-          fi
+          cp .github-pages/index.html .github-pages/404.html
+          touch .github-pages/.nojekyll
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
