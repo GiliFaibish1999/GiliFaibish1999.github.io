@@ -59,7 +59,8 @@ function NavBar() {
         scrolled ? "backdrop-blur-md bg-background/85 border-b border-border" : "bg-background/40 backdrop-blur-sm"
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-4 py-3 sm:flex-row sm:justify-between sm:px-6 sm:py-4">
+      {/* <nav className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-4 py-3 sm:flex-row sm:justify-between sm:px-6 sm:py-4"> */}
+      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-3 py-2.5 sm:px-6 sm:py-4">
         <a href="#top" className="shrink-0 text-base font-bold tracking-tight sm:text-lg">
           <span className="text-accent">{"<"}</span>GF<span className="text-accent">{"/>"}</span>
         </a>
@@ -77,7 +78,8 @@ function NavBar() {
           ))}
         </ul>
 
-        <ul className="flex w-full max-w-full items-center justify-center gap-1 overflow-x-auto rounded-full border border-border bg-background/70 px-2 py-1 text-[11px] font-medium shadow-sm [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden">
+        {/* <ul className="flex w-full max-w-full items-center justify-center gap-1 overflow-x-auto rounded-full border border-border bg-background/70 px-2 py-1 text-[11px] font-medium shadow-sm [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden"> */}
+        <ul className="flex items-center gap-1 rounded-full border border-border bg-background/70 px-1.5 py-1 text-[11px] font-medium shadow-sm md:hidden">
           {NAV.map((n) => (
             <li key={n.id} className="shrink-0">
               <a
@@ -118,10 +120,12 @@ function Hero() {
   return (
     <section
       id="top"
-      className="relative grid-bg flex min-h-[100svh] items-center justify-center px-4 pb-12 pt-32 sm:px-6 sm:pb-16 sm:pt-28"
+      // className="relative grid-bg flex min-h-[100svh] items-center justify-center px-4 pb-12 pt-32 sm:px-6 sm:pb-16 sm:pt-28"
+      className="relative grid-bg flex min-h-[100svh] items-center justify-center px-4 pb-12 pt-24 sm:px-6 sm:pb-16 sm:pt-28"
     >
       <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
-        <div className="relative mb-6 sm:mb-8 md:mb-10">
+        {/* <div className="relative mb-6 sm:mb-8 md:mb-10"> */}
+        <div className="pointer-events-none absolute inset-0 rounded-full bg-accent/30 blur-3xl" />
           <div className="absolute inset-0 scale-110 rounded-full bg-accent/30 blur-3xl" />
           <img
             src={portrait}
@@ -130,7 +134,8 @@ function Hero() {
           />
         </div>
 
-        <h1 className="max-w-full text-[2.15rem] font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+        {/* <h1 className="max-w-full text-[2.15rem] font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"> */}
+        <h1 className="max-w-full text-[1.85rem] font-bold leading-[1.1] tracking-tight [overflow-wrap:anywhere] sm:text-5xl md:text-6xl lg:text-7xl">
           Hi, I am <FlipName />
         </h1>
 
