@@ -1,6 +1,7 @@
 // import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import portrait from "@/assets/portrait.png";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // export const Route = createFileRoute("/")({
 //   head: () => ({
@@ -113,6 +114,7 @@ function FlipName() {
 }
 
 function Hero() {
+  const isMobile = useIsMobile();
   return (
     <section
       id="top"
