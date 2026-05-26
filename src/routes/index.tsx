@@ -3,25 +3,25 @@ import { useEffect, useState } from "react";
 import portrait from "@/assets/portrait.png";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-// export const Route = createFileRoute("/")({
-//   head: () => ({
-//     meta: [
-//       { title: "Gili Faibish — Cloud Architect · DevOps · SRE" },
-//       {
-//         name: "description",
-//         content:
-//           "Gili Faibish — Cloud Architect, DevOps Engineer & SRE. 6+ years building AWS, Kubernetes and VMware platforms with Terraform, CI/CD and observability.",
-//       },
-//       { property: "og:title", content: "Gili Faibish — Cloud Architect · DevOps · SRE" },
-//       {
-//         property: "og:description",
-//         content:
-//           "Cloud Architect & DevOps Engineer specializing in AWS, Kubernetes, Terraform and Platform Engineering.",
-//       },
-//     ],
-//   }),
-//   component: Index,
-// });
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Gili Faibish — Cloud Architect · DevOps · SRE" },
+      {
+        name: "description",
+        content:
+          "Gili Faibish — Cloud Architect, DevOps Engineer & SRE. 6+ years building AWS, Kubernetes and VMware platforms with Terraform, CI/CD and observability.",
+      },
+      { property: "og:title", content: "Gili Faibish — Cloud Architect · DevOps · SRE" },
+      {
+        property: "og:description",
+        content:
+          "Cloud Architect & DevOps Engineer specializing in AWS, Kubernetes, Terraform and Platform Engineering.",
+      },
+    ],
+  }),
+  component: Index,
+});
 
 const NAV = [
   { id: "top", label: "About" },
