@@ -31,6 +31,24 @@ jobs:
       - name: Build site
         run: bun run build
 
+      - name: Verify mobile-safe CSS
+        run: |
+          CSS_FILE="$(find dist/assets -name '*.css' | head -n 1)"
+
+          echo "Checking CSS file: $CSS_FILE"
+
+          if grep -q "oklch" "$CSS_FILE"; then
+            echo "Found oklch() in built CSS. Mobile-safe color fix was not deployed."
+            exit 1
+          fi
+
+          if grep -q "background-attachment:fixed" "$CSS_FILE"; then
+            echo "Found background-attachment: fixed in built CSS. Mobile background fix was not deployed."
+            exit 1
+          fi
+
+          echo "Mobile-safe CSS check passed."
+
       - name: Prepare GitHub Pages output
         run: |
           test -f dist/index.html
@@ -66,3 +84,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        
