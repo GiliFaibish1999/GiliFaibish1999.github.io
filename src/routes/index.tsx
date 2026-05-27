@@ -60,7 +60,7 @@ function NavBar() {
         scrolled ? "backdrop-blur-md bg-background/85 border-b border-border" : "bg-background/40 backdrop-blur-sm"
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-4 py-3 sm:flex-row sm:justify-between sm:px-6 sm:py-4">
+      <nav className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-4 py-3 md:flex-row md:justify-between md:px-6 md:py-4">
         <a href="#top" className="shrink-0 text-base font-bold tracking-tight sm:text-lg">
           <span className="text-accent">{"<"}</span>GF<span className="text-accent">{"/>"}</span>
         </a>
@@ -78,7 +78,7 @@ function NavBar() {
           ))}
         </ul>
 
-        <ul className="flex w-full max-w-full items-center justify-center gap-1 overflow-x-auto rounded-full border border-border bg-background/70 px-2 py-1 text-[11px] font-medium shadow-sm [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden">
+        <ul className="flex w-full max-w-full items-center justify-start gap-1 overflow-x-auto rounded-full border border-border bg-background/70 px-2 py-1 text-[11px] font-medium shadow-sm [scrollbar-width:none] sm:justify-center md:hidden [&::-webkit-scrollbar]:hidden">
           {NAV.map((n) => (
             <li key={n.id} className="shrink-0">
               <a
