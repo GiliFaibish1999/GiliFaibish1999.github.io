@@ -107,7 +107,7 @@ function FlipName() {
   return (
     <span
       key={i}
-      className="block max-w-full break-words text-accent animate-in fade-in slide-in-from-bottom-2 duration-500 sm:inline"
+      className="block max-w-full break-words text-accent transition-opacity duration-500 sm:inline"
     >
       {words[i]}
     </span>
