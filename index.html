@@ -8,9 +8,29 @@
       name="description"
       content="Gili Faibish — Cloud Architect, DevOps Engineer and SRE specializing in AWS, Kubernetes, Terraform, VMware, CI/CD, observability and platform reliability."
     />
+    <style>
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #141923;
+        color: #f5f7fb;
+      }
+      #root {
+        min-height: 100vh;
+        background: #141923;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <noscript>
+        <main style="padding: 24px; font-family: system-ui, sans-serif;">
+          <h1>Gili Faibish</h1>
+          <p>Cloud Architect, DevOps Engineer and SRE.</p>
+        </main>
+      </noscript>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
