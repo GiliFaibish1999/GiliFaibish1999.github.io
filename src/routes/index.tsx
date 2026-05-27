@@ -62,7 +62,6 @@ function NavBar() {
     >
       <nav className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-4 py-3 md:flex-row md:justify-between md:px-6 md:py-4">
         <a href="#top" className="shrink-0 text-base font-bold tracking-tight sm:text-lg">
-          <span className="text-accent">{"<"}</span>GF<span className="text-accent">{"/>"}</span>
         </a>
 
         <ul className="hidden gap-8 text-sm font-medium md:flex">
